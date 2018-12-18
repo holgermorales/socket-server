@@ -30,7 +30,10 @@ export class Server {
     private escucharSockets() {
         console.log("Escuchando conexiones - sockets");
         this.io.on('connection', cliente => {
-            console.log("Cliente conectado");
+            //console.log("Cliente conectado", cliente.id);
+
+            socket.conectarCliente(cliente);
+
 
             /*
             cliente.on('disconnect', () => {
@@ -39,6 +42,8 @@ export class Server {
             */
             //Estate pendiente del evento mensaje
             socket.mensaje(cliente, this.io);
+
+            socket.configurarusuario(cliente, this.io);
 
             socket.desconectar(cliente);
         });
